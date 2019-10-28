@@ -1,10 +1,13 @@
-DROP DATABASE IF EXISTS books_db;
-CREATE DATABASE books_db;
-USE books_db;
+DROP DATABASE IF EXISTS bamazon;
+CREATE DATABASE bamazon;
+USE bamazon;
 
-CREATE TABLE books(
-  id INTEGER(11) AUTO_INCREMENT NOT NULL,
-  authorId INTEGER(11),
+CREATE TABLE products(
+  item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+  product_name VARCHAR(100),
+  department_name VARCHAR(100),
+  price VARCHAR(100),
+  stock_quantity INTEGER(11),
   title VARCHAR(100),
   PRIMARY KEY (id)
 );
@@ -16,35 +19,20 @@ CREATE TABLE authors(
   PRIMARY KEY (id)
 );
 
-INSERT INTO authors (firstName, lastName) values ('Jane', 'Austen');
-INSERT INTO authors (firstName, lastName) values ('Mark', 'Twain');
-INSERT INTO authors (firstName, lastName) values ('Lewis', 'Carroll');
-INSERT INTO authors (firstName, lastName) values ('Andre', 'Asselin');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Bacon-Scented Pillow', 'Home', '12.00', '40');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Lottery Prayer Candle', 'Home', '6.99', '100');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Pickle-Flavored Popsicles', 'Food', '3.99', '25');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Plastic Beach Umbrella Anchor', 'Outdoors', '13.45', '40');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Inspirational Message Stones', 'Garden', '7.30', '15');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Dolphin Hand Puppet', 'Toys', '9.00', '125');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Live Maine Lobster', 'Food', '20.00', '30');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('As Seen on TV Roach Gel', 'Home', '9.88', '30');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Facial Hair Remover', 'Cosmetics', '15.99', '50');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Infrared Sauna', 'Health', '2800.00', '10');
 
-INSERT INTO books (title, authorId) values ('Pride and Prejudice', 1);
-INSERT INTO books (title, authorId) values ('Emma', 1);
-INSERT INTO books (title, authorId) values ('The Adventures of Tom Sawyer', 2);
-INSERT INTO books (title, authorId) values ('Adventures of Huckleberry Finn', 2);
-INSERT INTO books (title, authorId) values ('Alice''s Adventures in Wonderland', 3);
-INSERT INTO books (title, authorId) values ('Dracula', null);
 
-SELECT * FROM authors;
-SELECT * FROM books;
+SELECT * FROM products;
 
--- show ALL books with authors
--- INNER JOIN will only return all matching values from both tables
-SELECT title, firstName, lastName
-FROM books
-INNER JOIN authors ON books.authorId = authors.id;
 
--- show ALL books, even if we don't know the author
--- LEFT JOIN returns all of the values from the left table, and the matching ones from the right table
-SELECT title, firstName, lastName
-FROM books
-LEFT JOIN authors ON books.authorId = authors.id;
-
--- show ALL books, even if we don't know the author
--- RIGHT JOIN returns all of the values from the right table, and the matching ones from the left table
-SELECT title, firstName, lastName
-FROM books
-RIGHT JOIN authors ON books.authorId = authors.id;
+SELECT item_id, product_name, department_name, price, stock_quantity
+FROM products
