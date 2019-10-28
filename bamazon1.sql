@@ -6,18 +6,11 @@ CREATE TABLE products(
   item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
   product_name VARCHAR(100),
   department_name VARCHAR(100),
-  price VARCHAR(100),
+  price DECIMAL(10,2),
   stock_quantity INTEGER(11),
-  title VARCHAR(100),
-  PRIMARY KEY (id)
+  PRIMARY KEY (item_id)
 );
 
-CREATE TABLE authors(
-  id INTEGER(11) AUTO_INCREMENT NOT NULL,
-  firstName VARCHAR(100),
-  lastName VARCHAR(100),
-  PRIMARY KEY (id)
-);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Bacon-Scented Pillow', 'Home', '12.00', '40');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Lottery Prayer Candle', 'Home', '6.99', '100');
