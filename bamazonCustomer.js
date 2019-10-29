@@ -24,6 +24,7 @@ connection.connect(function(err) {
 function runSearch() {
     console.log("Selecting all products...\n");
     connection.query("SELECT * FROM products", function(err, res) {
+      //similar code when comparing inquirer results and DB
       if (err) throw err;
       // Log all results of the SELECT statement
       for (var i = 0; i < res.length; i++) {
@@ -34,7 +35,7 @@ function runSearch() {
         console.log(res[i].stock_quantity);
         console.log("\n");
       }
-      connection.end()
+      //to be used after no longer searchign database connection.end()
       rangeSearch();
       
     });
@@ -53,14 +54,28 @@ function runSearch() {
           name: "quantity",
           type: "input",
           message: "How many would you like to purchase? ",
+         
         }
       ])
+      
       .then(function(answer) {
         console.log(answer.userPurchase);
         console.log(answer.quantity);
-
+        var query = "SELECT product_name, stock_quantity FROM bamazon WHERE item_id=answer.userPurchase";
+      connection.query(query, [answer.userPurchase, answer.quantity], function(err, res) {
+          console.log(
+            res
+          );
+        
+        //runSearch();
+      });
     });
-    }
+
+}
+        
+        
+
+    
 
     
   
