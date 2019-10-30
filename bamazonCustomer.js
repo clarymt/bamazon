@@ -41,12 +41,12 @@ function runSearch() {
     });
   
 
-  function itemChoice() {
+  var itemChoice = function {
     inquirer
       .prompt([
         {
           name: "userPurchase",
-          type: "rawlist",
+          type: "input",
           message: "Which product would you like to purchase? (Enter Id_#) ",
      
         },
@@ -60,6 +60,31 @@ function runSearch() {
       ])
       
       .then(function(answer) {
+        var itemSelected = answer.userPurchase;
+        var quantityChosen = answer.quantity;
+        connection.query("SELECT * FROM products WHERE Id=?", selection, function(
+            err,
+            res
+          ) {
+            if (err) throw err;
+            if (res.length === 0) {
+              console.log(
+                "That Product doesn't exist, Please enter a Product Id from the list above"
+              );
+    
+              itemChoice(); }
+
+       /*  console.log(itemSelected);
+      console.log(answer.quantity);
+      for (var i = 0; i < results.length; i++){
+        if (quantityChosen > results[itemSelected].stock_quantity) {
+            console.log("We simply cannot supply your needs at this moment in time.")
+        }
+        else {
+          console.log("Thanks for your business! You have purchased " + answer.quantity +" " + itemSelected + "(s)")
+        }
+      
+        
        /* var chosenItem;
         for (var i = 0; i < results.length; i++) {
           if (results[i].item_name === answer.userPurchase) {
@@ -92,18 +117,7 @@ function runSearch() {
           console.log("Your bid was too low. Try again...");
           runSearch();
         }
-      });*/
-          var itemSelected = answer.userPurchase;
-          var quantityChosen = answer.quantity;
-           console.log(itemSelected);
-        console.log(answer.quantity);
-        for (var i = 0; i < results.length; i++){
-          if (quantityChosen > results[itemSelected].stock_quantity) {
-              console.log("We simply cannot supply your needs at this moment in time.")
-          }
-          else {
-            console.log("Thanks for your business! You have purchased " + answer.quantity +" " + itemSelected + "(s)")
-          }}
+      });
           
        
      //   var query = "SELECT product_name, stock_quantity FROM bamazon WHERE item_id=answer.userPurchase";
@@ -112,15 +126,4 @@ function runSearch() {
         //     res
          //);
         
-        //runSearch();
-          
-    
-
-          
-        
-        
-
-    
-
-    
-  
+        runSearch(); */

@@ -1,1 +1,2 @@
 # bamazon
+If youre reading this, please hold off on grading assignment as i need to finish a few lines of code after work tomorrow/wednesday as well as attach gif of working app with only a couple steps left
