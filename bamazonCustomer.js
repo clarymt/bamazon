@@ -60,7 +60,7 @@ function runSearch() {
       ])
       
       .then(function(answer) {
-        var chosenItem;
+       /* var chosenItem;
         for (var i = 0; i < results.length; i++) {
           if (results[i].item_name === answer.userPurchase) {
             chosenItem = results[i];
@@ -92,8 +92,8 @@ function runSearch() {
           console.log("Your bid was too low. Try again...");
           runSearch();
         }
-      });
-          /*var itemSelected = answer.userPurchase;
+      });*/
+          var itemSelected = answer.userPurchase;
           var quantityChosen = answer.quantity;
            console.log(itemSelected);
         console.log(answer.quantity);
@@ -103,20 +103,20 @@ function runSearch() {
           }
           else {
             console.log("Thanks for your business! You have purchased " + answer.quantity +" " + itemSelected + "(s)")
-          }}*/
-          /*
+          }}
+          
        
-        var query = "SELECT product_name, stock_quantity FROM bamazon WHERE item_id=answer.userPurchase";
-      connection.query(query, [answer.userPurchase, answer.quantity], function(err, res) {
-          console.log(
-            res
-          );
+     //   var query = "SELECT product_name, stock_quantity FROM bamazon WHERE item_id=answer.userPurchase";
+      //connection.query(query, [answer.userPurchase, answer.quantity], function(err, res) {
+       //    console.log(
+        //     res
+         //);
         
         //runSearch();
-          */ });
+          
     
 
-}}
+          
         
         
 
