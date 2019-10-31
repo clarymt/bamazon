@@ -41,27 +41,19 @@ function runSearch() {
     });
   
 
-  var itemChoice = function {
+  var itemChoice = function() {
     inquirer
       .prompt([
         {
           name: "userPurchase",
           type: "input",
-          message: "Which product would you like to purchase? (Enter Id_#) ",
+          message: "Which product would you like to purchase? (Enter Id_#) "
      
-        },
-        {
-          name: "quantity",
-          type: "input",
-          message: "How many would you like to purchase? ",
-      
-         
         }
       ])
       
       .then(function(answer) {
         var itemSelected = answer.userPurchase;
-        var quantityChosen = answer.quantity;
         connection.query("SELECT * FROM products WHERE Id=?", selection, function(
             err,
             res
@@ -69,61 +61,20 @@ function runSearch() {
             if (err) throw err;
             if (res.length === 0) {
               console.log(
-                "That Product doesn't exist, Please enter a Product Id from the list above"
+                "We ran all out of that particular produce, I however implore you to purchase another."
               );
     
-              itemChoice(); }
+              itemChoice(); 
 
-       /*  console.log(itemSelected);
-      console.log(answer.quantity);
-      for (var i = 0; i < results.length; i++){
-        if (quantityChosen > results[itemSelected].stock_quantity) {
-            console.log("We simply cannot supply your needs at this moment in time.")
-        }
-        else {
-          console.log("Thanks for your business! You have purchased " + answer.quantity +" " + itemSelected + "(s)")
-        }
-      
-        
-       /* var chosenItem;
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].item_name === answer.userPurchase) {
-            chosenItem = results[i];
-          }
-        }
-
-        // determine if bid was high enough
-        if (chosenItem.stock_quantity < parseInt(answer.quantity)) {
-          // bid was high enough, so update db, let the user know, and start over
-          connection.query(
-            "UPDATE auctions SET ? WHERE ?",
-            [
-              {
-                stock_quantity: stock_quantity - answer.quantity
-              },
-              {
-                item_id: chosenItem.item_id
-              }
-            ],
-            function(error) {
-              if (error) throw err;
-              console.log("Bid placed successfully!");
-              start();
-            }
-          );
-        }
-        else {
-          // bid wasn't high enough, so apologize and start over
-          console.log("Your bid was too low. Try again...");
-          runSearch();
-        }
-      });
-          
-       
-     //   var query = "SELECT product_name, stock_quantity FROM bamazon WHERE item_id=answer.userPurchase";
-      //connection.query(query, [answer.userPurchase, answer.quantity], function(err, res) {
-       //    console.log(
-        //     res
-         //);
-        
-        runSearch(); */
+            } 
+            else 
+              inquirer
+                .prompt 
+               ({
+                    name: "quantity",
+                    type: "input",
+                    message: "How many would you like to purchase? "
+                
+                })
+                .then(function(secondAnswer))
+              } 
