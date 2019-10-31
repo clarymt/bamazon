@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "password",
-  database: "bamazon"
+  database: "bamazon",
 });
 
 connection.connect(function(err) {
@@ -43,18 +43,18 @@ function runSearch() {
 
   var itemChoice = function() {
     inquirer
-      .prompt([
+      .prompt(
         {
           name: "userPurchase",
           type: "input",
           message: "Which product would you like to purchase? (Enter Id_#) "
      
         }
-      ])
+      )
       
       .then(function(answer) {
         var itemSelected = answer.userPurchase;
-        connection.query("SELECT * FROM products WHERE Id=?", selection, function(
+        connection.query("SELECT * FROM products WHERE Id=?", itemSelected, function(
             err,
             res
           ) {
@@ -67,7 +67,7 @@ function runSearch() {
               itemChoice(); 
 
             } 
-            else 
+            else {
               inquirer
                 .prompt 
                ({
@@ -86,5 +86,26 @@ function runSearch() {
                     } else {
                         console.log(res[0].stock_quantity + "... Good choice! ");
                         console.log("You bought " + quantityChosen + " of this particular essential and paid $ " + res[0].price);
-                    }
-                    }
+                        var newQuantity = res[0].stock_quantity - quantity;
+                        connection.query(
+                          "UPDATE products SET stock_quantity = " +
+                            newQuantity +
+                            " WHERE id = " +
+                            res[0].id,
+                          function(err, resUpdate) {
+                            if (err) throw err;
+                            console.log("");
+                            console.log("Your Order has been Processed");
+                            console.log("Thank you for Shopping with us...!");
+                            console.log("");
+                            connection.end();
+                          }
+                        );
+                      }
+                    });
+                }
+              });
+            });
+        };
+    }  
+        runSearch();
