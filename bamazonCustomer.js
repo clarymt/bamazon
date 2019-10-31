@@ -76,5 +76,15 @@ function runSearch() {
                     message: "How many would you like to purchase? "
                 
                 })
-                .then(function(secondAnswer))
-              } 
+                .then(function(secondAnswer) {
+                    var quantityChosen = secondAnswer.quantity;
+                    if (quantityChosen > res[0].stock_quantity) {
+                        console.log(
+                            "Hey I appreciate your business, but we're waiting on another shipment. Only " + res[0].stock_quantity + " on hand!!!"
+                        );
+                        itemChoice();
+                    } else {
+                        console.log(res[0].stock_quantity + "... Good choice! ");
+                        console.log("You bought " + quantityChosen + " of this particular essential and paid $ " + res[0].price);
+                    }
+                    }
