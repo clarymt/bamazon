@@ -28,11 +28,8 @@ function runSearch() {
       if (err) throw err;
       // Log all results of the SELECT statement
       for (var i = 0; i < results.length; i++) {
-        console.log(results[i].item_id);
-        console.log(results[i].product_name);
-        console.log(results[i].department_name);
-        console.log(results[i].price);
-        console.log(results[i].stock_quantity);
+        console.log("\n");
+        console.log(results[i].item_id, results[i].product_name, results[i].department_name, results[i].price, results[i].stock_quantity);
         console.log("\n");
       }
       //to be used after no longer searchign database connection.end()
@@ -54,7 +51,7 @@ function runSearch() {
       
       .then(function(answer) {
         var itemSelected = answer.userPurchase;
-        connection.query("SELECT * FROM products WHERE Id=?", itemSelected, function(
+        connection.query("SELECT * FROM products WHERE item_id=?", itemSelected, function(
             err,
             res
           ) {
@@ -64,7 +61,7 @@ function runSearch() {
                 "We ran all out of that particular produce, I however implore you to purchase another."
               );
     
-              itemChoice(); 
+//CHANGE              //itemChoice(); 
 
             } 
             else {
@@ -84,21 +81,21 @@ function runSearch() {
                         );
                         itemChoice();
                     } else {
-                        console.log(res[0].stock_quantity + "... Good choice! ");
-                        console.log("You bought " + quantityChosen + " of this particular essential and paid $ " + res[0].price);
-                        var newQuantity = res[0].stock_quantity - quantity;
+                        console.log(res[0].product_name + "... Good choice! ");
+                        console.log("You bought " + quantityChosen + " of this particular essential and paid $" + res[0].price);
+                        var newQuantity = res[0].stock_quantity - quantityChosen;
                         connection.query(
                           "UPDATE products SET stock_quantity = " +
                             newQuantity +
-                            " WHERE id = " +
-                            res[0].id,
+                            " WHERE item_id = " +
+                            res[0].item_id,
                           function(err, resUpdate) {
                             if (err) throw err;
                             console.log("");
                             console.log("Your Order has been Processed");
                             console.log("Thank you for Shopping with us...!");
                             console.log("");
-                            connection.end();
+//CHANGE                            connection.end();
                           }
                         );
                       }
