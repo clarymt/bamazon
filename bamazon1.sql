@@ -16,7 +16,7 @@ INSERT INTO products (product_name, department_name, price, stock_quantity) valu
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Lottery Prayer Candle', 'Home', '6.99', '100');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Pickle-Flavored Popsicles', 'Food', '3.99', '25');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Plastic Beach Umbrella Anchor', 'Outdoors', '13.45', '40');
-INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Inspirational Message Stones', 'Garden', '7.30', '15');
+INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Inspirational Message Stones', 'Garden', '7.36', '15');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Dolphin Hand Puppet', 'Toys', '9.00', '125');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('Live Maine Lobster', 'Food', '20.00', '30');
 INSERT INTO products (product_name, department_name, price, stock_quantity) values ('As Seen on TV Roach Gel', 'Home', '9.88', '30');

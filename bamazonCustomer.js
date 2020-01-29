@@ -22,16 +22,22 @@ connection.connect(function(err) {
 
 
 function runSearch() {
-    console.log("Selecting all products...\n");
+    console.log("\n");
+    console.log("Recieving shipment...\n");
     connection.query("SELECT * FROM products", function(err, results) {
       //similar code when comparing inquirer results and DB
       if (err) throw err;
       // Log all results of the SELECT statement
+      console.log("");
       for (var i = 0; i < results.length; i++) {
-        console.log("\n");
-        console.log(results[i].item_id, results[i].product_name, results[i].department_name, results[i].price, results[i].stock_quantity);
-        console.log("\n");
+        console.log(results[i].item_id + " | ",
+          results[i].product_name + " | ", 
+          "Department: " + results[i].department_name + " | ", 
+          "$" + results[i].price + " | ", 
+          "stock: " + results[i].stock_quantity);
       }
+      console.log("");
+
       //to be used after no longer searchign database connection.end()
       itemChoice();
       
@@ -48,7 +54,6 @@ function runSearch() {
      
         }
       )
-      
       .then(function(answer) {
         var itemSelected = answer.userPurchase;
         connection.query("SELECT * FROM products WHERE item_id=?", itemSelected, function(
@@ -58,10 +63,10 @@ function runSearch() {
             if (err) throw err;
             if (res.length === 0) {
               console.log(
-                "We ran all out of that particular produce, I however implore you to purchase another."
+                "That is unfortunately not an option, I however implore you to purchase another."
               );
     
-//CHANGE              //itemChoice(); 
+              itemChoice(); 
 
             } 
             else {
@@ -79,10 +84,13 @@ function runSearch() {
                         console.log(
                             "Hey I appreciate your business, but we're waiting on another shipment. Only " + res[0].stock_quantity + " on hand!!!"
                         );
-                        itemChoice();
+                    itemChoice();
                     } else {
+                        var math = quantityChosen*res[0].price
+                        console.log("");
                         console.log(res[0].product_name + "... Good choice! ");
-                        console.log("You bought " + quantityChosen + " of this particular essential and paid $" + res[0].price);
+                        console.log("");
+                        console.log("You bought " + quantityChosen + " unit(s) of this essential and paid a total of ONLY $" + math);
                         var newQuantity = res[0].stock_quantity - quantityChosen;
                         connection.query(
                           "UPDATE products SET stock_quantity = " +
@@ -93,9 +101,10 @@ function runSearch() {
                             if (err) throw err;
                             console.log("");
                             console.log("Your Order has been Processed");
+                            console.log("");
                             console.log("Thank you for Shopping with us...!");
                             console.log("");
-//CHANGE                            connection.end();
+                           connection.end();
                           }
                         );
                       }
@@ -104,5 +113,5 @@ function runSearch() {
               });
             });
         };
-    }  
-        runSearch();
+    }
+    //runSearch(); 
