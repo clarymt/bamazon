@@ -19,4 +19,4 @@ To run the customer interface please follow the steps below:
 	npm install
 	node bamazonCustomer.js
 ### Demo
-![bamazonDemo](bamazon\bamazonDemo.gif)
+![](bamazon/bamazonDemo.gif)
