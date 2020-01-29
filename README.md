@@ -18,4 +18,5 @@ To run the customer interface please follow the steps below:
 	cd bamazon
 	npm install
 	node bamazonCustomer.js
-![Bamazon Demo](C:/Users/clary/AppData/Local/Temp/8a2c5b66-73de-48dc-9fcb-a409bf2311a2.gif)
+### Demo
+(/bamazonGiF.stgbamazonGIF.gif)
